@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+      <a href="file:///C:/Users/user/OneDrive/Ishchi%20stol/Cowork/IT/Virtual%20filio/html/index.html#portfolio">
+        <img src="left-arrow.png" alt="Back" style="width:50px; height:50px;">
+      </a>
+        <div
+      style="
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: auto;
+        margin-top: 90px;
+        padding: 20px;
+        text-align: center;
+        background: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      "
+    >
+      <h1 style="color: #4caf50">Matn Klassifikatsiyasi</h1>
+      <textarea
+        id="inputText"
+        placeholder="Matnni kiriting"
+        style="
+          width: 100%;
+          height: 100px;
+          margin-bottom: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          padding: 10px;
+          font-size: 14px;
+        "
+      ></textarea>
+      <button
+        id="classifyButton"
+        style="
+          padding: 10px 20px;
+          font-size: 16px;
+          background: #4caf50;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: background 0.3s;
+        "
+      >
+        Klassifikatsiya qilish
+      </button>
+      <h2 id="result" style="margin-top: 20px; color: #333"></h2>
+    </div>
+    <script>
+      const ijobiySozlar = ["yaxshi", "zo'r", "chiroyli", "ajoyib", "samimiy"];
+      const salbiySozlar = ["yomon", "qo'rqinchli", "xunuk", "yaramas", "qoniqarsiz"];
+
+      function classifyMatn(matn) {
+        let ijobiySanash = 0;
+        let salbiySanash = 0;
+
+        const sozlar = matn.toLowerCase().split(/\s+/);
+
+        sozlar.forEach((soz) => {
+          if (ijobiySozlar.includes(soz)) {
+            ijobiySanash++;
+          } else if (salbiySozlar.includes(soz)) {
+            salbiySanash++;
+          }
+        });
+
+        if (ijobiySanash > salbiySanash) {
+          return "ijobiy";
+        } else if (salbiySanash > ijobiySanash) {
+          return "salbiy";
+        } else {
+          return "neytral";
+        }
+      }
+
+      document.getElementById("classifyButton").addEventListener("click", () => {
+        const inputText = document.getElementById("inputText").value;
+        if (!inputText.trim()) {
+          document.getElementById("result").textContent = "Iltimos, matn kiriting!";
+          document.getElementById("result").style.color = "red";
+          return;
+        }
+
+        const label = classifyMatn(inputText);
+        document.getElementById("result").textContent = `Matn: "${inputText}" → Javob: ${label}`;
+        document.getElementById("result").style.color =
+          label === "ijobiy"
+            ? "green"
+            : label === "salbiy"
+            ? "red"
+            : "orange";
+      });
+    </script>
+  </body>
+</html>
